@@ -53,7 +53,7 @@ namespace EvernoteOAuth {
         private static readonly string AUTHORIZE_URI = @"/OAuth.action";
 
         // ダミーのコールバック URI
-        private static readonly string DUMMY_CALLBACK_URL = @"_";
+        private static readonly string DUMMY_CALLBACK_URI = @"_";
 
         // リクエストトークン URI
         private string requestTokenUri_;
@@ -67,10 +67,10 @@ namespace EvernoteOAuth {
 
         // プロパティ要素
         private long edamExpires_;
-        private string edamNoteStoreUrl_;
+        private string edamNoteStoreUri_;
         private string oauthToken_;
         private string edamUserId_;
-        private string edamWebApiUrlPrefix_;
+        private string edamWebApiUriPrefix_;
 
         /// <summary>
         /// 開発用Sadboxかリリース用かのフラグ
@@ -98,10 +98,10 @@ namespace EvernoteOAuth {
                                           baseUri, AUTHORIZE_URI);
 
             EdamExpires = 0;
-            EdamNoteStoreUrl = "";
+            EdamNoteStoreUri = "";
             OAuthToken = "";
             EdamUserId = "";
-            EdamWebApiUrlPrefix = "";
+            EdamWebApiUriPrefix = "";
         }
 
         /// <summary>
@@ -119,12 +119,12 @@ namespace EvernoteOAuth {
         /// <summary>
         /// NoteStore API の URI
         /// </summary>
-        public string EdamNoteStoreUrl {
+        public string EdamNoteStoreUri {
             get {
-                return edamNoteStoreUrl_;
+                return edamNoteStoreUri_;
             }
             set {
-                edamNoteStoreUrl_ = value;
+                edamNoteStoreUri_ = value;
             }
         }
 
@@ -155,12 +155,12 @@ namespace EvernoteOAuth {
         /// <summary>
         /// WebAPI URI Prefix
         /// </summary>
-        public string EdamWebApiUrlPrefix {
+        public string EdamWebApiUriPrefix {
             get {
-                return edamWebApiUrlPrefix_;
+                return edamWebApiUriPrefix_;
             }
             set {
-                edamWebApiUrlPrefix_ = value;
+                edamWebApiUriPrefix_ = value;
             }
         }
 
@@ -197,7 +197,7 @@ namespace EvernoteOAuth {
             sb.Append(nonce);
             if (string.IsNullOrEmpty(oauthToken_)) {
                 sb.Append(@"&oauth_callback=");
-                sb.Append(DUMMY_CALLBACK_URL);
+                sb.Append(DUMMY_CALLBACK_URI);
             } else {
                 sb.Append(@"&oauth_token=");
                 sb.Append(oauth_token_);
@@ -250,10 +250,10 @@ namespace EvernoteOAuth {
             NameValueCollection prms = HttpUtility.ParseQueryString(cred);
 
             EdamExpires = long.Parse(prms[@"edam_expires"]);
-            EdamNoteStoreUrl = prms[@"edam_noteStoreUrl"];
+            EdamNoteStoreUri = prms[@"edam_noteStoreUrl"];
             OAuthToken = prms[@"oauth_token"];
             EdamUserId = prms[@"edam_userId"];
-            EdamWebApiUrlPrefix = prms[@"edam_webApiUrlPrefix"];
+            EdamWebApiUriPrefix = prms[@"edam_webApiUrlPrefix"];
         }
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace EvernoteOAuth {
                 parseCred(cred);
 
                 bool result = string.IsNullOrEmpty(OAuthToken) &&
-                              string.IsNullOrEmpty(EdamNoteStoreUrl);
+                              string.IsNullOrEmpty(EdamNoteStoreUri);
                 return result;
             } catch (Exception ex) {
                 throw ex;
