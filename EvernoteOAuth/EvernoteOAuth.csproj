@@ -43,6 +43,7 @@
   <ItemGroup>
     <EmbeddedResource Include="WebDialog.resx">
       <DependentUpon>WebDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

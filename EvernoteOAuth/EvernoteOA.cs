@@ -61,7 +61,7 @@ namespace EvernoteOAuth {
         private string authorizeUri_;
 
         // 一時クレデンシャル
-        private string oauth_token_ = null;
+        private string temp_credential_ = null;
         // 一時クレデンシャル署名
         private string oauth_verifier_ = null;
 
@@ -195,12 +195,12 @@ namespace EvernoteOAuth {
             sb.Append(timestamp);
             sb.Append(@"&oauth_nonce=");
             sb.Append(nonce);
-            if (string.IsNullOrEmpty(oauthToken_)) {
+            if (string.IsNullOrEmpty(temp_credential_)) {
                 sb.Append(@"&oauth_callback=");
                 sb.Append(DUMMY_CALLBACK_URI);
             } else {
                 sb.Append(@"&oauth_token=");
-                sb.Append(oauth_token_);
+                sb.Append(temp_credential_);
                 sb.Append(@"&oauth_verifier=");
                 if (!string.IsNullOrEmpty(oauth_verifier_)) {
                     sb.Append(oauth_verifier_);
@@ -240,7 +240,7 @@ namespace EvernoteOAuth {
             dlg.ShowDialog(parentForm);
             dlg.Dispose();
 
-            oauth_token_ = dlg.OAuthToken;
+            temp_credential_ = dlg.OAuthToken;
             oauth_verifier_ = dlg.OAuthVerifier;
         }
 
@@ -275,8 +275,8 @@ namespace EvernoteOAuth {
                 string cred = getWebRequest(credUri);
                 parseCred(cred);
 
-                bool result = string.IsNullOrEmpty(OAuthToken) &&
-                              string.IsNullOrEmpty(EdamNoteStoreUri);
+                bool result = !string.IsNullOrEmpty(OAuthToken) &&
+                              !string.IsNullOrEmpty(EdamNoteStoreUri);
                 return result;
             } catch (Exception ex) {
                 throw ex;
