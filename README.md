@@ -9,7 +9,7 @@ Evernote 専用 AOuth 認証クラス (.Net)
     EvernoteOA oauth = new EvernoteOA(EvernoteOA.HostService.Sandbox);
     if (oauth.doAuth(consumerKey, consumerSecret)) {
         // success;
-        // oauth.OAuthToken OAuth <-- Access Token
+        // oauth.OAuthToken       <-- Access Token
         // oauth.EdamNoteStoreUri <-- NoteStore URI
     } else {
         // fail
