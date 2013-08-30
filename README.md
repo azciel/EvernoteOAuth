@@ -10,7 +10,7 @@ Evernote 専用 AOuth 認証クラス (.Net)
     if (oauth.doAuth(consumerKey, consumerSecret)) {
         // success;
         // oauth.OAuthToken OAuth <-- Access Token
-        // oauth.EdamNoteStoreUri <-- NoteSote URI
+        // oauth.EdamNoteStoreUri <-- NoteStore URI
     } else {
         // fail
     }
