@@ -42,7 +42,7 @@ namespace EvernoteOAuth {
     /// <remarks>
     /// Evernote の OAuth 認証を実行する。Web 画面も表示する
     /// </remarks> 
-    class EvernoteOAuth {
+    public class EvernoteOA {
 
         // Evernote API への URI Prefix
         private static readonly string EVERNOTE_URI_SANDBOX = @"https://sandbox.evernote.com";
@@ -84,7 +84,7 @@ namespace EvernoteOAuth {
         /// コンストラクタ
         /// </summary>
         /// <param name="service">開発用Sadboxかリリース用かのフラグ</param>
-        public EvernoteOAuth(HostService service) {
+        public EvernoteOA(HostService service) {
             string baseUri;
             if (service == HostService.Production) {
                 baseUri = EVERNOTE_URI_PRODUCTION;
@@ -302,11 +302,11 @@ namespace EvernoteOAuth {
         /// <param name="consumerSecret">Consumer Secret</param>
         /// <param name="parentForm">認証 Web 画面の親フォーム</param>
         /// <returns>認証結果オブジェクト</returns>
-        public static EvernoteOAuth Auth(HostService service,
+        public static EvernoteOA Auth(HostService service,
                                          string consumerKey,
                                          string consumerSecret,
                                          Form parentForm) {
-            EvernoteOAuth auth = new EvernoteOAuth(service);
+            EvernoteOA auth = new EvernoteOA(service);
             auth.doAuth(consumerKey, consumerSecret, parentForm);
             return auth;
         }
@@ -319,10 +319,10 @@ namespace EvernoteOAuth {
         /// <param name="consumerSecret">Consumer Secret</param>
         /// <param name="parentForm">認証 Web 画面の親フォーム</param>
         /// <returns>認証結果オブジェクト</returns>
-        public static EvernoteOAuth Auth(HostService service,
+        public static EvernoteOA Auth(HostService service,
                                          string consumerKey,
                                          string consumerSecret) {
-            return EvernoteOAuth.Auth(service,
+            return EvernoteOA.Auth(service,
                                       consumerKey, consumerSecret,
                                       null);
         }
