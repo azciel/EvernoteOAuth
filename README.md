@@ -1,7 +1,8 @@
 EvernoteOAuth
 =============
 
-Evernote 専用 AOuth 認証クラス (.Net)
+Evernote 専用 OAuth 認証クラス (.Net)
+デスクトップアプリ用
 
 
 使用例：
