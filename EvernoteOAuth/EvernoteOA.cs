@@ -61,9 +61,9 @@ namespace EvernoteOAuth {
         private string authorizeUri_;
 
         // 一時クレデンシャル
-        private string temp_credential_ = null;
+        private string tempCredential_ = null;
         // 一時クレデンシャル署名
-        private string oauth_verifier_ = null;
+        private string oauthVerifier_ = null;
 
         // プロパティ要素
         private long edamExpires_;
@@ -195,15 +195,15 @@ namespace EvernoteOAuth {
             sb.Append(timestamp);
             sb.Append(@"&oauth_nonce=");
             sb.Append(nonce);
-            if (string.IsNullOrEmpty(temp_credential_)) {
+            if (string.IsNullOrEmpty(tempCredential_)) {
                 sb.Append(@"&oauth_callback=");
                 sb.Append(DUMMY_CALLBACK_URI);
             } else {
                 sb.Append(@"&oauth_token=");
-                sb.Append(temp_credential_);
+                sb.Append(tempCredential_);
                 sb.Append(@"&oauth_verifier=");
-                if (!string.IsNullOrEmpty(oauth_verifier_)) {
-                    sb.Append(oauth_verifier_);
+                if (!string.IsNullOrEmpty(oauthVerifier_)) {
+                    sb.Append(oauthVerifier_);
                 }
             }
             return sb.ToString();
@@ -240,8 +240,8 @@ namespace EvernoteOAuth {
             dlg.ShowDialog(parentForm);
             dlg.Dispose();
 
-            temp_credential_ = dlg.OAuthToken;
-            oauth_verifier_ = dlg.OAuthVerifier;
+            tempCredential_ = dlg.OAuthToken;
+            oauthVerifier_ = dlg.OAuthVerifier;
         }
 
         // 認証結果をパースしてプロパティにセット
@@ -271,6 +271,9 @@ namespace EvernoteOAuth {
                 string tmpToken = getWebRequest(tmpTokenUri);
                 string authUri = createAuthUri(tmpToken);
                 showAuthDialog(authUri, parentForm);
+                if (string.IsNullOrEmpty(tempCredential_) || string.IsNullOrEmpty(oauthVerifier_)) {
+                    return false;
+                }
                 string credUri = createTokenUri(consumerKey, consumerSecret);
                 string cred = getWebRequest(credUri);
                 parseCred(cred);
