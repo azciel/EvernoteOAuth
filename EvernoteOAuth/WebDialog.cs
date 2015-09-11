@@ -90,10 +90,8 @@ namespace EvernoteOAuth {
             webBrowser.Navigate(authUri_);
         }
 
-        // ブラウザ表示開始ハンドラ
-        private void webBrowser_Navigating(object sender,
-                                           WebBrowserNavigatingEventArgs e) {
-
+        // ブラウザナビゲーション発生後ハンドラ
+        private void webBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e) {
             if (webBrowser.Url == null) {
                 return;
             }
@@ -101,24 +99,6 @@ namespace EvernoteOAuth {
                 return;
             }
 
-            Regex regex = new Regex(@"oauth_token=[^&]+.*oauth_verifier=[^&]+");
-            Match m = regex.Match(webBrowser.Url.Query);
-            if (m.Success) {
-                string q = m.Value;
-                NameValueCollection prm = HttpUtility.ParseQueryString(q);
-                OAuthToken = prm[@"oauth_token"];
-                OAuthVerifier = prm[@"oauth_verifier"];
-                Close();
-            }
-        }
-
-        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e) {
-            if (webBrowser.Url == null) {
-                return;
-            }
-            if (string.IsNullOrEmpty(webBrowser.Url.Query)) {
-                return;
-            }
             Regex regex = new Regex(@"oauth_token=[^&]+.*oauth_verifier=[^&]+");
             Match m = regex.Match(webBrowser.Url.Query);
             if (m.Success) {
