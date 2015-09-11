@@ -34,9 +34,9 @@ using System.Runtime.InteropServices;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("EvernoteOAuth")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("OAuth class library for Evernote Desktop Windows Applications.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("HAKKO Development Co.,Ltd. az'Ciel division")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("Copyright ©  2013 HAKKO Development Co.,Ltd. az'Ciel division")]
 [assembly: AssemblyTrademark("")]
@@ -60,8 +60,8 @@ using System.Runtime.InteropServices;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.1")]
+[assembly: AssemblyFileVersion("1.0.0.1")]
 
 /*
  * -*- settings for emacs. -*-
