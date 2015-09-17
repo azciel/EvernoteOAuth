@@ -96,7 +96,6 @@ namespace EvernoteOAuth {
                                              baseUri, REQUEST_TOKEN_URI);
             authorizeUri_ = string.Format(@"{0}{1}",
                                           baseUri, AUTHORIZE_URI);
-
             EdamExpires = 0;
             EdamNoteStoreUri = "";
             OAuthToken = "";
@@ -228,7 +227,7 @@ namespace EvernoteOAuth {
             sb.Append(authorizeUri_);
             sb.Append(@"?");
             sb.Append(token);
-            sb.Append(@"&preferRegistration=true");
+            //sb.Append(@"&preferRegistration=true");
             return sb.ToString();
         
         }
